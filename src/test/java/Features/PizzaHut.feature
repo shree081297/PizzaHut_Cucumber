@@ -3,7 +3,7 @@ Feature: This feature will be used to automate PizzaHut Website
 
   Scenario: This scenario will be used to Place the Order
     Given I have launched the application
-    When I enter the location as "pune railway station, Agarkar Nagar, Pune, Maharashtra, India"
+    When I enter the location as "pune"
     And I select the very first suggestion from the list
        Then I should land on the Deals page
     And I select the tab as "Pizzas"
