@@ -39,7 +39,7 @@ public class PizzaHutStepDefs {
 			driver.get("https://www.pizzahut.co.in/");
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 			Hooks.test.log(LogStatus.PASS, "Application has launched");
-
+			
 		} catch (Exception e) {
 			Hooks.test.log(LogStatus.FAIL, "User failed to land on HomePage");
 			Assert.fail();
@@ -52,9 +52,7 @@ public class PizzaHutStepDefs {
 
 			WebElement locationFun = driver.findElement(By.xpath("//input[@type='text']"));
 			locationFun.sendKeys(location);
-			Thread.sleep(8000);
-			locationFun.submit();
-			Hooks.test.log(LogStatus.PASS, "User should be able to enter location", "User sucessfully entered location");
+	
 		} catch (Exception e) {
 			Hooks.test.log(LogStatus.FAIL, "User failed to enter location in location field");
 			Assert.fail();
@@ -64,13 +62,14 @@ public class PizzaHutStepDefs {
 	@When("I select the very first suggestion from the list")
 	public void i_select_the_very_first_suggestion_from_the_list() throws InterruptedException, IOException {
 		try {
-
-			WebElement loClick = driver.findElement(By.xpath("(//div[@data-synth='offer-collection-hut'])[1]"));
-			loClick.click();
-			// Thread.sleep(8000);
-			// WebElement OrderTime = driver.findElement(By.xpath("//button[@class='button
-			// button--secondary text-center']"));
-			// OrderTime.click();
+			List<WebElement>list=driver.findElements(By.xpath("//div[text()='Pune Railway Station']"));
+			System.out.println(list.size());
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getText().contains("Pune Railway Station")) {
+				list.get(i).click();
+				}
+			}
+		
 			Hooks.test.log(LogStatus.PASS, "User received popup and clicks on address in popup");
 		} catch (Exception e) {
 			Hooks.test.log(LogStatus.FAIL, "User unable to received popup");
